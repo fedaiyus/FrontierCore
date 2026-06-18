@@ -1,0 +1,41 @@
+{
+  "name": "frontier-core",
+  "version": "0.1.0",
+  "description": "Official Discord bot for Frontier Networks.",
+  "main": "dist/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc && node scripts/copy-assets.cjs",
+    "start": "node dist/index.js",
+    "app:profile": "node scripts/update-application-profile.cjs",
+    "channels:list": "node scripts/list-guild-channels.cjs",
+    "panel:application": "node scripts/post-application-panel.cjs",
+    "panel:ems": "node scripts/post-ems-panel.cjs",
+    "panel:rank": "node scripts/post-rank-panel.cjs",
+    "panel:support": "node scripts/post-support-panel.cjs",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev"
+  },
+  "keywords": [
+    "discord",
+    "discordjs",
+    "frontier-networks"
+  ],
+  "author": "Frontier Networks",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^6.10.1",
+    "discord.js": "^14.19.3",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "prisma": "^6.10.1",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=20.11.0"
+  }
+}

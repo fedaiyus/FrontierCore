@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model GuildConfig {
+  guildId                String   @id
+  guildName              String
+  branchName             String?
+  language               String   @default("en")
+  timezone               String   @default("UTC")
+  logChannelId           String?
+  welcomeChannelId       String?
+  ticketCategoryId       String?
+  applicationCategoryId  String?
+  privateVoiceCategoryId String?
+  supportRoleId          String?
+  staffRoleId            String?
+  adminRoleId            String?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+}
+
+model Ticket {
+  id        Int       @id @default(autoincrement())
+  guildId   String
+  channelId String    @unique
+  userId    String
+  type      String
+  status    String    @default("open")
+  claimedBy String?
+  createdAt DateTime  @default(now())
+  closedAt  DateTime?
+
+  @@index([guildId])
+  @@index([userId])
+  @@index([status])
+}
+
+model Application {
+  id         Int       @id @default(autoincrement())
+  guildId    String
+  userId     String
+  type       String
+  status     String    @default("pending")
+  answers    String
+  reviewedBy String?
+  createdAt  DateTime  @default(now())
+  reviewedAt DateTime?
+
+  @@index([guildId])
+  @@index([userId])
+  @@index([status])
+}
+
+model RankRequest {
+  id              Int       @id @default(autoincrement())
+  guildId         String
+  userId          String
+  requestedRoleId String
+  reason          String
+  status          String    @default("pending")
+  reviewedBy      String?
+  createdAt       DateTime  @default(now())
+  reviewedAt      DateTime?
+
+  @@index([guildId])
+  @@index([userId])
+  @@index([status])
+}
+
+model PrivateVoiceRoom {
+  id        Int      @id @default(autoincrement())
+  guildId   String
+  ownerId   String
+  channelId String   @unique
+  createdAt DateTime @default(now())
+
+  @@index([guildId])
+  @@index([ownerId])
+}
+
+model ModerationLog {
+  id          Int      @id @default(autoincrement())
+  guildId     String
+  userId      String
+  moderatorId String
+  action      String
+  reason      String?
+  createdAt   DateTime @default(now())
+
+  @@index([guildId])
+  @@index([userId])
+  @@index([moderatorId])
+  @@index([action])
+}
