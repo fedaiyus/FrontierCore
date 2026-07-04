@@ -21,7 +21,7 @@ async function buildPresenceRotation(client: Client<true>): Promise<PresenceData
     },
     {
       status: "online",
-      activities: [{ type: ActivityType.Custom, name: "Frontier Core", state: "🇺🇸 USA • 🇦🇺 Australia • 🇹🇷 Türkiye" }]
+      activities: [{ type: ActivityType.Custom, name: "Frontier Core", state: "USA • Australia • Türkiye" }]
     },
     {
       status: "online",
